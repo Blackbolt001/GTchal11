@@ -1,17 +1,18 @@
-const fs = require("fs");
 const express = require("express");
+const app = express();
+
+const fs = require("fs");
 const path = require("path");
 
-const app = express();
 // Sets port for listening and let heroku decide on port, if not, use port 3005
 const PORT = process.env.PORT || 3001;
 
 //serve images, CSS files, and JavaScript files in a directory named public
-app.use(express.static('public'));
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
-app.get("/notes", (req, res) => {
+app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, "/public/notes.html"));
 });
 
@@ -19,7 +20,7 @@ app.get("/api/notes", (req, res) => {
     res.sendFile(path.join(__dirname, "/db/db.json"));
 });
 
-app.get("*", (req, res) => {
+app.get("'/'", (req, res) => {
     res.sendFile(path.join(__dirname, "/public/index.html"));
 });
 
@@ -52,4 +53,4 @@ app.delete("/api/notes/:id", (req, res) => {
 });
 
 
-app.listen(PORT, () => console.log("Server listening on port " + PORT));
+app.listen(PORT, () => console.log("Server listening on port " + '${PORT}'));
