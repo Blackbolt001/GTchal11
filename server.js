@@ -7,6 +7,9 @@ const path = require("path");
 // Sets port for listening and let heroku decide on port, if not, use port 3005
 const PORT = process.env.PORT || 3001;
 
+
+const apiRoutes = require('./routes/apiRoutes');
+
 //serve images, CSS files, and JavaScript files in a directory named public
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
